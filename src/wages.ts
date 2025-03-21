@@ -1,5 +1,6 @@
 const KIVA_RATE = 0.1;
 const TAX_RATE = 1 + KIVA_RATE; // ToDo: calculate with time-dependent accurate tax rate
+const SZOCHO_RATE = 0.13;
 const SZJA_RATE = 0.15;
 
 class Month {
@@ -94,7 +95,12 @@ function monthlyWages2_(months: Month[], wages: Wage[], pmMonths: PmMonths) {
 }
 
 function createMonthlyWagesRow2_(month: Month, wage: Wage, project: string, scale: number, from: Date, until: Date):BudgetRow {
-    let mw = (wage.wageGross + wage.wageElse) * TAX_RATE + wage.szepCard * (1 + KIVA_RATE + SZJA_RATE) + wage.feeMonthly + wage.feeHourly * month.workdays * 8;
+    let mw =
+        (wage.wageGross + wage.wageElse) * TAX_RATE
+        + wage.szepCard * (1 + SZOCHO_RATE + SZJA_RATE)
+        + wage.feeMonthly
+        + wage.lakhatasi
+        + wage.feeHourly * month.workdays * 8;
     const d = dateDiffInDays_(from, until) + 1;
     let ml = dateDiffInDays_(month.from, month.until) + 1;
     if (d < ml) {
