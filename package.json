@@ -1,0 +1,16 @@
+{
+  "name": "rdi-budget-script",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc",
+    "push": "npm run build && npx clasp push",
+    "login": "npx clasp login --no-localhost",
+    "watch": "chokidar 'src/**/*' -c 'npm run push'"
+    },
+  "devDependencies": {
+    "@google/clasp": "^3.0.2-alpha",
+    "@types/google-apps-script": "^1.0.63",
+    "chokidar-cli": "^3.0.0",
+    "typescript": "^5.0.0"
+  }
+}
